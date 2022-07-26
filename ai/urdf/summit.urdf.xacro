@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="summit_xl"  >
+
+<xacro:include filename="$(find ai)/urdf/mecanum_wheel.urdf.xacro"/>
+<xacro:include filename="$(find ai)/urdf/summit_base.urdf.xacro" />
+<!--Wheel parameter-->
+<xacro:property name="wheel_offset_x" value="0.2225" />
+<xacro:property name="wheel_offset_y" value="0.2045" />
+<xacro:property name="wheel_offset_z" value="0.0" />
+
+<xacro:macro name="robot">
+    <xacro:summit_base/>
+
+    <xacro:mecanum_wheel prefix="summit_front_right" parent="summit_base_footprint" reflect="false">
+        <origin xyz="${wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+    </xacro:mecanum_wheel>
+    <xacro:mecanum_wheel prefix="summit_front_left" parent="summit_base_footprint" reflect="true">
+        <origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+    </xacro:mecanum_wheel>
+    <!-- <xacro:mecanum_wheel prefix="summit_back_left" parent="summit_base_footprint" reflect="true">
+        <origin xyz="${-wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+    </xacro:mecanum_wheel>
+    <xacro:mecanum_wheel prefix="summit_back_right" parent="summit_base_footprint" reflect="false">
+        <origin xyz="${-wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}" rpy="0 0 0"/>
+    </xacro:mecanum_wheel>  -->
+</xacro:macro>
+<xacro:robot/>
+</robot>
